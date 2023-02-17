@@ -17,38 +17,93 @@
 
 
 
-# # def ResistCalc(list):
-# #     for i in range(len(list)):
-# #         b = i
-# #         c = i+1
-# #         if(i==0):
-# #             calc = (b * c) / (b + c)
-# #             b = calc
-# #         else:
-# #             calc = 
+def ResistCalc():
+    chose = int(input("""
+    Calcular:
+    1 - Associacao de Resistores (Ohm)
+    2 - Potencia (v)
+    3 - Corrente (A)
+    """))
 
-# #     return list*b/list+b
+    match chose:
+        case 1:
+            associacao = input(" P - Paralelo\n S - Serie \n> ")
+            match associacao:
+                case 'p':
+                    qnt = int(input("Insira a quntidade de resistores: \n> "))
+                    resists = []
+                    for i in range(qnt):
+                        resists.append(float(input(f"Insira o {i+1}º resistor: \n> ")))
+                    aux = (resists[0]*resists[1]) / (resists[0]+resists[1])
+                    if len(resists) > 2:
+                        for i in range(len(resists)):
+                            if i > 1:
+                                Req = ((resists[i]*aux) / (resists[i]+aux))
+                                aux = Req
+                        print("\n\nResultado =" + Req)
+                    else:
+                        print("\n\nResultado =" + aux)
+                case 's':
+                    qnt = int(input("Insira a quntidade de resistores: \n> "))
+                    resists = []
+                    for i in range(qnt):
+                        resists.append(float(input(f"Insira o {i+1}º resistor: \n> ")))
+                    print(f"\n\nResultado: {sum(resists)}")
+        case 2:
+            i = float(input("Insira a corrente (i)A: \n> "))
+            r = float(input("Insira a resistencia (r)OHM: \n> "))
+            print("Resultado = " + (r*i))
+        case 3:
+            v = float(input("Insira a potencia (v)V: \n> "))
+            r = float(input("Insira a resistencia (r)OHM: \n> "))
+            print("Resultado = " + (v/r))
 
 
-# def CapCalc(area,capacitancia,distancia,coeficiente):
-#     c = k*a/d*(8,85*10**-12)
 
 
-operation = int(input("Insira a operação:\n> "))
 
-match operation:
-    case 1:
-        kcalc = 8.85*(10**(-12))
-        chose = input("calcular c/ k/ a/ ou d/\n> ")
-        match chose:
-            case 'c':
-                a = float(input("Insira A:\n> "))
-                k = float(input("Insira K:\n> "))
-                d = float(input("Insira D:\n> "))
-                print(k*(a/d)*(kcalc))
-            case 'd':
-                a = float(input("Insira A:\n> "))
-                k = float(input("Insira K:\n> "))
-                c = float(input("Insira C:\n> "))
-                print((k*a*(kcalc))/c)
+
+def CapCalc():
+    kcalc = 8.85*(10**(-12))
+    chose = input("calcular c/ k/ a/ ou d/\n> ")
+    match chose:
+        case 'c':
+            a = float(input("Insira Area (A):\n> "))
+            k = float(input("Insira Constante Dielétrica(K):\n> "))
+            d = float(input("Insira Distancia (D):\n> "))
+            print(k*(a/d)*(kcalc))
+        case 'd':
+            a = float(input("Insira Area (A):\n> "))
+            k = float(input("Insira Constante Dielétrica(K):\n> "))
+            c = float(input("Insira Capacitancia (C):\n> "))
+            print((k*a*(kcalc))/c)
+        case 'a':
+            d = float(input("Insira Distancia (D):\n> "))
+            k = float(input("Insira Constante Dielétrica(K):\n> "))
+            c = float(input("Insira Capacitância (C):\n> "))
+            print((c*d)/(k*kcalc))
+        case 'k':
+            c = float(input("Insira Capacitância (C):\n> "))
+            a = float(input("Insira Area (A):\n> "))
+            d = float(input("Insira Distancia (D):\n> "))
+            print(-((-1*c)*((a/d)*kcalc)))
+
+
+
+while 1:
+    operation = int(input("""
+    Insira a operação:\n> 
+        1 - Calcular Resistor 
+        2 - Calcular Capacitor
+        0 - Sair
+    """))
+
+    match operation:
+        case 1:
+            ResistCalc()
+        case 2:
+            CapCalc()
+        case 0:
+            break
+
 
