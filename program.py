@@ -65,7 +65,7 @@ def ResistCalc():
 
 def CapCalc():
     kcalc = 8.85*(10**(-12))
-    chose = input("calcular c/ k/ a/ ou d/\n> ")
+    chose = input("calcular c/ k/ a/ d/ ou Ceq/\n> ")
     match chose:
         case 'c':
             a = float(input("Insira Area (A):\n> "))
@@ -87,6 +87,39 @@ def CapCalc():
             a = float(input("Insira Area (A):\n> "))
             d = float(input("Insira Distancia (D):\n> "))
             print(-((-1*c)*((a/d)*kcalc)))
+        case 't':
+
+            qtd = int(input("Insira a quantidade total de capacitores:"))
+            parallel = []
+            serie = []
+            sum_serie = 0
+            while 1:
+                chose = input("Deseja adicionar Série (s), Paralelo (p) ou Calcular (c):")
+                if(chose == 's'):
+                    qtd = int(input("insira a quantidade"))
+                    sum = 0
+                    for i in range(qtd):
+                        serie.append(int(input(f"insira o {i+1}º capacitor: \n>")))
+                    qtd = 0
+                elif(chose == 'p'):
+                    qtd = int(input("insira a quantidade"))
+                    sum = 0
+                    for i in range(qtd):
+                        sum += int(input(f"insira o {i+1}º capacitor: \n>"))
+                    parallel.append(sum)
+                    qtd = 0
+                elif(chose == 'c'):
+                    for item in parallel:
+                        serie.append(item)
+                    for item in serie:
+                        sum_serie += (item**-1)
+                    res = (sum_serie**-1)
+                    print(f"Resultado: {res}")
+                    res = 0
+                    qtd = 0
+                    break
+
+
 
 
 
