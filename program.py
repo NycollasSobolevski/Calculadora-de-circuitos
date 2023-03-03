@@ -65,7 +65,7 @@ def ResistCalc():
 
 def CapCalc():
     kcalc = 8.85*(10**(-12))
-    chose = input("calcular c/ k/ a/ d/ ou Ceq/\n> ")
+    chose = input("calcular c/ k/ a/ d/ ou Ceq(T)/\n> ")
     match chose:
         case 'c':
             a = float(input("Insira Area (A):\n> "))
